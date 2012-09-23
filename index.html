@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bootstrap 101 Template</title>
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        body { margin: 3em; }
+    </style>
+</head>
+<body>
+<ul class="tooltip-examples">
+</ul>
+<button type="button">Add</button>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script>
+
+    $('.tooltip-examples').tooltip({
+        selector: "a[rel=tooltip]"
+    });
+
+    $('button').click(function() {
+        $('.tooltip-examples').append('<li><a href="#" rel="tooltip" data-placement="top" data-original-title="Tooltip over top">Tooltip over top</a></li>');
+    });
+
+</script>
+</body>
+</html>
