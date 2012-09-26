@@ -44,16 +44,13 @@ delay	        number | object	0	delay showing and hiding the popover (ms) - does
         placement:'right'
     };
 
+    var togglePopover = function() { $(this).popover(popoverOptions).popover('toggle'); };
+    var hidePopover = function() { $(this).popover('hide'); };
+
     // bubbled event for selector
-    $('.popover-example').on('click', 'p[rel=popover]',
-            function (e) {
-                $(this).popover(popoverOptions).popover('toggle');
-            }
-            ).on('mouseout', 'p[rel=popover]',
-            function (e) {
-                $(this).popover('hide');
-            }
-    );
+    $('.popover-example')
+            .on('click', 'p[rel=popover]', togglePopover)
+            .on('mouseout', 'p[rel=popover]', hidePopover);
 
     // add new popovers into dom
     $('button').click(function () {
