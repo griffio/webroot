@@ -1,27 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bootstrap 101 Template</title>
-    <!-- Bootstrap -->
+    <title>Bootstrap Creating Popovers  and for Touch devices</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
-        body { margin: 3em; }
+        body {
+            margin: 3em;
+        }
+
+        p {
+            width: 15em;
+        }
     </style>
 </head>
 <body>
-<ul class="tooltip-examples">
-</ul>
+<pre>
+Name	        type	default	    description
+animation	    boolean	true	    apply a css fade transition to the tooltip
+html	        boolean	true	    Insert html into the popover. If false, jquery's text method will be used to insert content into the dom. Use text if you're worried about XSS attacks.
+placement	    string  function	'right'	how to position the popover - top | bottom | left | right
+selector	    string	false	    if a selector is provided, tooltip objects will be delegated to the specified targets
+trigger	        string	'click'     how popover is triggered - click | hover | focus | manual
+title	        string | function	''	default title value if `title` attribute isn't present
+content	        string | function	''	default content value if `data-content` attribute isn't present
+delay	        number | object	0	delay showing and hiding the popover (ms) - does not apply to manual trigger type
+                                    If a number is supplied, delay is applied to both hide/show
+                                    Object structure is: delay: { show: 500, hide: 100 }
+</pre>
+<div class="popover-example">
+    <p rel="popover" title="From title attribute" data-content="Popover triggered by mousedown">This has a popover to the right and is triggered by mousedown</p>
+</div>
 <button type="button">Add</button>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script>
 
-    $('.tooltip-examples').tooltip({
-        selector: "a[rel=tooltip]"
-    });
+    var popoverOptions = {
+        offset:10,
+        trigger:'manual',
+        animate:true,
+        html:false,
+        delay:{ show:0, hide:50 },
+        placement:'right'
+    };
 
-    $('button').click(function() {
-        $('.tooltip-examples').append('<li><a href="#" rel="tooltip" data-placement="top" data-original-title="Tooltip over top">Tooltip over top</a></li>');
+    // bubbled event for selector
+    $('.popover-example').on('click', 'p[rel=popover]',
+            function (e) {
+                $(this).popover(popoverOptions).popover('toggle');
+            }
+            ).on('mouseout', 'p[rel=popover]',
+            function (e) {
+                $(this).popover('hide');
+            }
+    );
+
+    // add new popovers into dom
+    $('button').click(function () {
+        $('.popover-example').append('<p rel="popover" title="From title attribute" data-content="Popover triggered by mousedown">This has a popover to the right and is triggered by mousedown</p>')
     });
 
 </script>
